@@ -1,0 +1,18 @@
+export default {
+    HeroHeading: 'LogoCraft AI',
+    HeroSubHeading: 'Perfect logos for Apps, Businesses and Websites',
+    HeroDesc: 'Craft unique and professional logos effortlessly with our AI-powered tool. Perfect for apps, businesses, websites, and more!',
+    InputPlaceholder: 'enter a title for your logo',
+    LogoTitle: 'Logo Title',
+    LogoTitleDesc: 'For Your Business, App, or Website Name for a Custom Logo',
+    LogoDescTitle: 'Describe your Logo Vision',
+    LogoDescDesc: 'Share your ideas, themes, or inspirations to create a logo that perfectly represents your brand or project',
+    LogoIdeaTitle: 'Select your Design Idea',
+    LogoIdeaDesc: 'Choose a design style that aligns with your vision',
+    LogoDesignTitle: 'Choose your Logo Style',
+    LogoDesignDesc: 'Select the type of logo design that best represents your brand',
+    LogoColorPaletteTitle: 'Choose your Color Palette',
+    LogoColorPaletteDesc: 'Pick a color palette that reflects your brand personality and creates a lasting impression',
+    ResultTitle: 'Review Your Inputs',
+    ResultDescription: 'Verify the details you have entered before generating your logo.',
+}
