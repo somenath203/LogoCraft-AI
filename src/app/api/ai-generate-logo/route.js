@@ -61,16 +61,9 @@ export async function POST(req) {
         
     } catch (e) {
 
-        console.log(e);
-        
-
-        console.log(e?.response?.data)
-
-        console.log(e?.response?.data?.message)
-
         return NextResponse.json(
             {
-                error: e
+                error: e?.response?.data?.message
             }
         )
 

@@ -70,6 +70,9 @@ const Page = () => {
 
     } catch (error) {
 
+      console.log(error);
+      
+
       toast.error('Something went wrong or the model is unable to generate the logo right now. Please try again after sometime.', {
         duration: 10000
       });
