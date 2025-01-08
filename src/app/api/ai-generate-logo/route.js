@@ -7,6 +7,9 @@ import { db } from "@/firebaseConfig";
 import { AILogoPrompt } from "@/gemini-model-config";
 
 
+export const maxDuration = 60;
+
+
 export async function POST(req) {
 
 

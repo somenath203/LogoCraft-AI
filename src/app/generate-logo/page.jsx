@@ -179,7 +179,7 @@ const Page = () => {
 
           <Sparkle size={32} className="text-white" />
 
-          <span className='text-2xl text-white'>Generate Logo</span>
+          <span className='text-2xl text-white text-center'>Generate Logo</span>
 
           </div> : <ZeroCredits />}
 
