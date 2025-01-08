@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider afterSignOutUrl={process.env.WEBSITE_BASE_URL}>
 
       <html lang="en">
 
