@@ -1,7 +1,7 @@
 'use client';
 
-import { useContext, useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Suspense, useContext, useState } from "react";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -44,111 +44,115 @@ const Page = () => {
 
 
   return (
-    <div className="my-14 p-10 border rounded-xl">
+    <Suspense fallback={<div className="flex justify-center items-center h-screen"><Loader2 size={50} className="animate-spin duration-700" /></div>}>
 
-      {step === 1 ? (
+      <div className="my-14 p-10 border rounded-xl">
 
-        <LogoTitle
-          onHandleInputChange={(value) => onHandleInputChange('logotitle', value)} 
-        />
+        {step === 1 ? (
 
-      ) : (
-
-        step === 2 ? (
-
-          <LogoDescription
-            onHandleInputChange={(value) => onHandleInputChange('logodescription', value)} 
-            allFormData={allFormData}
+          <LogoTitle
+            onHandleInputChange={(value) => onHandleInputChange('logotitle', value)} 
           />
 
         ) : (
 
-          step === 3 ? (
+          step === 2 ? (
 
-            <LogoColorPalette
-              onHandleInputChange={(value) => onHandleInputChange('logocolorpalette', value)} 
+            <LogoDescription
+              onHandleInputChange={(value) => onHandleInputChange('logodescription', value)} 
               allFormData={allFormData}
             />
 
           ) : (
 
-            step === 4 ? (
+            step === 3 ? (
 
-              <LogoDesign
-                onHandleInputChange={(value) => onHandleInputChange('logodesign', value)} 
+              <LogoColorPalette
+                onHandleInputChange={(value) => onHandleInputChange('logocolorpalette', value)} 
                 allFormData={allFormData}
               />
 
-            ) : step === 5 ? (
+            ) : (
 
-              <LogoIdea
-                onHandleInputChange={(value) => onHandleInputChange('logoidea', value)} 
-                allFormData={allFormData}
-              />
+              step === 4 ? (
 
-            ) : step === 6 ? (
+                <LogoDesign
+                  onHandleInputChange={(value) => onHandleInputChange('logodesign', value)} 
+                  allFormData={allFormData}
+                />
 
-              <LogoResponse allFormData={allFormData} />
+              ) : step === 5 ? (
 
-            ) : null
+                <LogoIdea
+                  onHandleInputChange={(value) => onHandleInputChange('logoidea', value)} 
+                  allFormData={allFormData}
+                />
+
+              ) : step === 6 ? (
+
+                <LogoResponse allFormData={allFormData} />
+
+              ) : null
+
+            )
 
           )
 
-        )
+        )}
 
-      )}
+        <div className="flex items-center justify-between mt-5">
 
-      <div className="flex items-center justify-between mt-5">
+          {step !== 1 && <Button disabled={userInfoComingFromFirebaseDB?.credits === 0} variant='outline' className='flex items-center gap-1' onClick={() => setStep(step - 1)}>
 
-        {step !== 1 && <Button disabled={userInfoComingFromFirebaseDB?.credits === 0} variant='outline' className='flex items-center gap-1' onClick={() => setStep(step - 1)}>
+            <ArrowLeft />
 
-          <ArrowLeft />
+            <span>Previous</span>
 
-          <span>Previous</span>
+          </Button>}
 
-        </Button>}
+          {step !== 6 && userInfoComingFromFirebaseDB?.credits !== 0 && <Button disabled={userInfoComingFromFirebaseDB?.credits === 0} className='flex items-center gap-1' onClick={() => setStep(step + 1)}>
 
-        {step !== 6 && userInfoComingFromFirebaseDB?.credits !== 0 && <Button disabled={userInfoComingFromFirebaseDB?.credits === 0} className='flex items-center gap-1' onClick={() => setStep(step + 1)}>
+            <span>Next</span>
+            
+            <ArrowRight />
 
-          <span>Next</span>
-          
-          <ArrowRight />
+          </Button>}
 
-        </Button>}
+          {step === 6 && <>
 
-        {step === 6 && <>
+            <Button 
+              className='flex items-center gap-2'
+              disabled={!allFormData?.logotitle || !allFormData?.logodescription || !allFormData?.logocolorpalette || !allFormData?.logodesign || !allFormData?.logoidea}
+              onClick={redirectUserToGenerateLogoPageOnClickingGenerateLogoButton}
+            >
 
-          <Button 
-            className='flex items-center gap-2'
-            disabled={!allFormData?.logotitle || !allFormData?.logodescription || !allFormData?.logocolorpalette || !allFormData?.logodesign || !allFormData?.logoidea}
-            onClick={redirectUserToGenerateLogoPageOnClickingGenerateLogoButton}
-          >
+              Next
 
-            Next
+            </Button>
 
-          </Button>
+          </>}
 
-        </>}
+        </div>
+
+
+        {step === 6 && <div className="mt-3 flex flex-col items-end justify-center gap-2">
+            
+          {!allFormData?.logotitle && <p className="font-medium text-red-500">Logo Title is missing.</p>}
+
+          {!allFormData?.logodescription && <p className="font-medium text-red-500">Logo Description is missing.</p>}
+                
+          {!allFormData?.logocolorpalette && <p className="font-medium text-red-500">Logo Color Palette is missing.</p>}
+                
+          {!allFormData?.logodesign && <p className="font-medium text-red-500">Logo Design is missing.</p>}
+
+          {!allFormData?.logoidea && <p className="font-medium text-red-500">Logo Idea is missing.</p>}
+
+        </div>}
+
 
       </div>
 
-
-      {step === 6 && <div className="mt-3 flex flex-col items-end justify-center gap-2">
-            
-        {!allFormData?.logotitle && <p className="font-medium text-red-500">Logo Title is missing.</p>}
-  
-        {!allFormData?.logodescription && <p className="font-medium text-red-500">Logo Description is missing.</p>}
-              
-        {!allFormData?.logocolorpalette && <p className="font-medium text-red-500">Logo Color Palette is missing.</p>}
-              
-        {!allFormData?.logodesign && <p className="font-medium text-red-500">Logo Design is missing.</p>}
-  
-        {!allFormData?.logoidea && <p className="font-medium text-red-500">Logo Idea is missing.</p>}
-  
-      </div>}
-
-
-    </div>
+    </Suspense>
   )
 }
 
