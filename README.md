@@ -45,8 +45,6 @@ Your patience is appreciated during the logo creation process and recommend wait
 
 ---
 
----
-
 ## Regarding Deployment
 
 Currently, the application is not deployed to a production environment due to the time constraints associated with generating logos. The AI-driven logo creation process can take approximately 2–3 minutes to complete. However, on Vercel's Hobby plan, serverless API routes have a maximum execution duration of 5 seconds, which can be configured up to 60 seconds. If a function exceeds this limit, it results in a 504 GATEWAY TIMEOUT error.
