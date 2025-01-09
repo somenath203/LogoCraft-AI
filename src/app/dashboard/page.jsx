@@ -84,9 +84,6 @@ const Page = () => {
 
   }, [userInfoComingFromFirebaseDB]);
 
-  console.log(userDetails);
-  
-
 
   return (
     <div className="min-h-screen flex justify-center mt-14">

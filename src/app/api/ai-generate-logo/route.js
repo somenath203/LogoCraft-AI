@@ -7,9 +7,6 @@ import { db } from "@/firebaseConfig";
 import { AILogoPrompt } from "@/gemini-model-config";
 
 
-export const maxDuration = 60;
-
-
 export async function POST(req) {
 
 
@@ -37,6 +34,9 @@ export async function POST(req) {
         const base64Image= buffer.toString('base64');
 
 
+        let updatedCredits;
+
+
         const base64ImageWithMime = `data:image/png;base64,${base64Image}`;
 
 
@@ -50,15 +50,18 @@ export async function POST(req) {
 
             const docRef = doc(db, 'users', emailAddressOfTheUserWhoCreatedTheLogo);
 
+            updatedCredits = Math.max(0, Number(creditsOfTheUser) - 5); 
+
             await updateDoc(docRef, {
-                credits: Math.max(0, Number(creditsOfTheUser) - 5) 
+                credits: updatedCredits
             });
             
         }
 
 
         return NextResponse.json({
-            logoImage: base64ImageWithMime
+            logoImage: base64ImageWithMime,
+            updatedCredits: updatedCredits
         }, { status: 200 });
 
         

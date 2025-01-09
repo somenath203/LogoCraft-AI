@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 import HeadingDescComponent from "../_components/HeadingDescComponent";
 import { Button } from "@/components/ui/button";
@@ -22,8 +23,37 @@ const Page = () => {
 
   const [cashFree, setCashFree] = useState(null);
 
+  const [ userDetails, setUserDetails ] = useState();
+
+  const [ loading, setLoading ] = useState(false);
+
 
   const router = useRouter();
+
+
+  const userDetailsAndItsLogos = async () => {
+
+    try {
+
+      setLoading(true);
+      
+      const { data } = await axios.get(`/api/users?email=${user?.primaryEmailAddress?.emailAddress}`);
+
+      setUserDetails(data?.userDetails);
+
+    } catch (error) {
+      
+      toast.error('Something went wrong. Please try after sometime.', {
+        duration: 5500
+      });
+      
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  }
 
 
   const initializeCashFreeSDK = async () => {
@@ -83,8 +113,6 @@ const Page = () => {
 
   
       if (data?.success) {
-
-        console.log(data?.data?.length);
 
         if (data?.data?.length === 0) {
 
@@ -177,9 +205,15 @@ const Page = () => {
 
   useEffect(() => {
 
-    initializeCashFreeSDK();
+    if (user) {
 
-  }, []);
+      initializeCashFreeSDK();
+
+      userDetailsAndItsLogos();
+
+    }
+
+  }, [user]);
 
 
   return (
@@ -187,7 +221,7 @@ const Page = () => {
 
         <HeadingDescComponent title='Buy Credits' description='Need more credits? Easily purchase more and continue creating stunning logos.' />
 
-        <p className="text-xl tracking-wide font-medium text-center">Credits Remaining: <span className='text-primary font-semibold'>{userInfoComingFromFirebaseDB?.credits}</span> </p>
+        <p className="text-xl tracking-wide font-medium text-center">Credits Remaining: <span className='text-primary font-semibold'>{loading ? <Loader2 className="animate-spin duration-700" /> : userInfoComingFromFirebaseDB?.credits}</span> </p>
             
         <div className="flex flex-col items-center justify-center gap-4 border p-10 rounded-xl shadow-lg">
 
