@@ -42,3 +42,19 @@ Generating a logo is a complex process that can take up to 2–3 minutes, depend
 Occasionally, logo generation may fail due to limitations in the usage provided by Hugging Face, as the model is accessed via their Inference API. 
 
 Your patience is appreciated during the logo creation process and recommend waiting for the system to complete the generation. If a failure occurs, please try again later.
+
+---
+
+---
+
+## Regarding Deployment
+
+Currently, the application is not deployed to a production environment due to the time constraints associated with generating logos. The AI-driven logo creation process can take approximately 2–3 minutes to complete. However, on Vercel's Hobby plan, serverless API routes have a maximum execution duration of 5 seconds, which can be configured up to 60 seconds. If a function exceeds this limit, it results in a 504 GATEWAY TIMEOUT error.
+
+This limitation is the reason why the web app has not been deployed to production.
+
+--- 
+
+## Disclaimer
+
+
