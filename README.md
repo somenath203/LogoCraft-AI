@@ -45,6 +45,7 @@ LogoCraft AI is a web application that enables users to create **personalized lo
 - 🤖 **Google Gemini API**: To generate creative logo ideas based on user inputs.  
 - 🧠 **Hugging Face**: Provides the Inference API to access the logo generation model.  
 - 🎨 **Flux-Midjourney-Mix2-LoRA Model**: An open-source AI model from Hugging Face for generating logos.  
+- 🔥 **Firebase**: Used to store user data and generated logos securely.  
 - 💰 **Cashfree Payments**: To handle credit purchases securely.  
 
 ---
