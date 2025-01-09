@@ -32,3 +32,13 @@ Each user starts with 10 credits, and every logo generation consumes 5 credits. 
 - **Google Gemini API**: To generate creative logo ideas based on user inputs.
 - **Flux-Midjourney-Mix2-LoRA Model**: An open-source AI model from Hugging Face for generating logos.
 - **Cashfree Payments**: To handle credit purchases securely.
+
+---
+
+## Note
+
+Generating a logo is a complex process that can take up to 2–3 minutes, depending on the length and complexity of your prompt. This duration is typical for AI-driven image generation tasks, as the system processes your inputs to create a unique design. 
+
+Occasionally, logo generation may fail due to limitations in the usage provided by Hugging Face, as the model is accessed via their Inference API. 
+
+Your patience is appreciated during the logo creation process and recommend waiting for the system to complete the generation. If a failure occurs, please try again later.
